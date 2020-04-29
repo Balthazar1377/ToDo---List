@@ -5,7 +5,11 @@ const todoControl = document.querySelector('.todo-control'),
     todoList = document.querySelector('.todo-list'),
     todoCompleted = document.querySelector('.todo-completed');
 
-const todoData = [];
+let todoData = [];
+
+if(localStorage.getItem("task")) {
+    todoData = JSON.parse(localStorage.getItem('task'));
+}
 
 function render () {
     todoList.textContent = '';
@@ -36,8 +40,8 @@ function render () {
 
         const todoRemove = li.querySelector('.todo-remove');
         todoRemove.addEventListener('click', function() {
-            // localStorage.removeItem('task');
             todoData.splice(item, 1);
+            localStorage.setItem('task', JSON.stringify(todoData));
             render();
         });
 
@@ -55,9 +59,5 @@ todoControl.addEventListener('submit', function (event) {
     }
     render();
 });
-
-if (localStorage.getItem('task')) {
-    todoData.push(JSON.parse(localStorage.getItem('task')));
-    }
 
 render();
