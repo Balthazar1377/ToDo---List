@@ -34,7 +34,13 @@ function render () {
 
         const btnTodoCompleted = li.querySelector('.todo-complete');
         btnTodoCompleted.addEventListener('click', function() {
+            if(item.completed === false) {
+            item.completed = true;
+            localStorage.setItem('task', JSON.stringify(todoData));
+            } else {
             item.completed = !item.completed;
+            localStorage.setItem('task', JSON.stringify(todoData));
+            }
             render();
         });
 
